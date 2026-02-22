@@ -2,15 +2,31 @@
 
 import { useState } from "react";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setSent(true);
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    setError(null);
+    const { error: err } = await supabase
+      .from("bookings")
+      .insert([{ name: formData.name, phone: formData.phone, service_type: "Inquiry" }]);
+    if (err) {
+      const msg = err.message;
+      const isFailedFetch = msg.includes("Failed to fetch") || msg.includes("fetch");
+      setError(
+        isFailedFetch
+          ? "Network error: Cannot reach Supabase. Check project status, .env.local, and internet."
+          : `Error: ${msg}`
+      );
+    } else {
+      setSent(true);
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    }
   };
 
   return (
@@ -55,6 +71,11 @@ export default function ContactPage() {
 
             <div className="glass-strong rounded-2xl shadow-xl p-6 animate-fade-in-up opacity-0 animate-delay-200">
               <h3 className="font-bold text-gray-900 mb-4">Inquiry Form</h3>
+              {error && (
+                <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-800 rounded-xl">
+                  {error}
+                </div>
+              )}
               {sent ? (
                 <div className="p-4 bg-green-100 text-green-800 rounded-xl font-medium">
                   Thank you! Your message has been sent. We will get back to you soon.

@@ -5,7 +5,14 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { Star } from "lucide-react";
 
-const brands = ["Kent", "Aquaguard", "Pureit", "Livpure"];
+const brandLogos = [
+  { name: "Kent", url: "https://logo.clearbit.com/kent.co.in" },
+  { name: "Aquaguard", url: "https://logo.clearbit.com/eurekaforbes.com" },
+  { name: "Pureit", url: "https://logo.clearbit.com/pureitwater.com" },
+  { name: "Livpure", url: "https://logo.clearbit.com/livpure.com" },
+  { name: "Blue Star", url: "https://logo.clearbit.com/bluestarindia.com" },
+  { name: "Havells", url: "https://logo.clearbit.com/havells.com" },
+];
 
 export default function HomePage() {
   const [name, setName] = useState("");
@@ -48,9 +55,17 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen text-gray-900">
-      {/* Hero Section */}
-      <section className="py-20 md:py-28 px-4 text-center">
+    <div className="min-h-screen text-gray-900 bg-gradient-to-b from-blue-50 to-white">
+      <div className="fixed top-0 left-0 right-0 z-40">
+        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between bg-white/60 backdrop-blur border-b border-white/70 shadow-sm">
+          <div className="text-2xl font-black italic tracking-wide">ROBAZAAR</div>
+          <a href="tel:+918227080442" className="text-blue-600 font-semibold hover:text-blue-700">
+            +91 8227080442
+          </a>
+        </div>
+      </div>
+
+      <section className="pt-20 md:pt-24 py-16 md:py-24 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up opacity-0">
           RO Service in 90 Mins
         </h1>
@@ -67,22 +82,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trusted By */}
       <section className="py-8 px-4 animate-fade-in-up opacity-0 animate-delay-300">
-        <p className="text-center text-sm font-medium text-gray-500 mb-4">Trusted by top brands</p>
-        <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-          {brands.map((brand, i) => (
-            <span
-              key={brand}
-              className="px-5 py-2 rounded-xl glass text-gray-700 font-semibold text-sm md:text-base"
-            >
-              {brand}
-            </span>
-          ))}
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-8">Brands We Service</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 md:gap-8 items-center">
+            {brandLogos.map((b) => (
+              <div key={b.name} className="flex items-center justify-center p-4 bg-white/70 backdrop-blur rounded-xl shadow-sm border border-white/70">
+                <img src={b.url} alt={b.name} className="h-10 md:h-12 object-contain" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Booking Form */}
       <section id="book" className="py-16 px-4 scroll-mt-24">
         <div className="max-w-md mx-auto">
           {success && (
@@ -95,14 +107,14 @@ export default function HomePage() {
               {error}
             </div>
           )}
-          <div className="glass-strong rounded-2xl shadow-xl p-6 md:p-8 animate-fade-in-up opacity-0 animate-delay-400">
+          <div className="rounded-2xl border border-white/70 bg-white/40 backdrop-blur-md shadow-lg p-6 md:p-8 animate-fade-in-up opacity-0 animate-delay-400">
             <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">Book Your Service</h2>
             <form onSubmit={handleBooking} className="space-y-4">
               <input
                 type="text"
                 placeholder="Your Name"
                 required
-                className="w-full p-3 border border-white/60 rounded-xl text-gray-900 placeholder-gray-500 bg-white/50 backdrop-blur"
+                className="w-full p-3 border border-white/70 rounded-xl text-gray-900 placeholder-gray-500 bg-white/60 backdrop-blur"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -110,7 +122,7 @@ export default function HomePage() {
                 type="tel"
                 placeholder="Mobile Number"
                 required
-                className="w-full p-3 border border-white/60 rounded-xl text-gray-900 placeholder-gray-500 bg-white/50 backdrop-blur"
+                className="w-full p-3 border border-white/70 rounded-xl text-gray-900 placeholder-gray-500 bg-white/60 backdrop-blur"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -126,7 +138,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up opacity-0 animate-delay-500">
@@ -152,7 +163,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-12 px-4 text-center bg-blue-600/90 backdrop-blur text-white">
         <h2 className="text-2xl font-bold mb-2">Ready to book?</h2>
         <p className="mb-6">Get clean water in 90 minutes.</p>
@@ -163,6 +173,32 @@ export default function HomePage() {
           Book Now
         </Link>
       </section>
+      <footer className="py-12 px-4">
+        <div className="max-w-6xl mx-auto rounded-2xl border border-white/70 bg-white/60 backdrop-blur p-8 shadow-sm">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Us</h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div>
+              <p className="text-gray-700">
+                Email:{" "}
+                <a href="mailto:rj8075088@gmail.com" className="text-blue-600 hover:text-blue-700">
+                  rj8075088@gmail.com
+                </a>
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-700">
+                Phone:{" "}
+                <a href="tel:+918227080442" className="text-blue-600 hover:text-blue-700">
+                  +91 8227080442
+                </a>
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-700">Service Areas: Coming Soon</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
