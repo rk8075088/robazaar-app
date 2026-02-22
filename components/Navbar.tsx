@@ -15,7 +15,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
+    <header className="sticky top-0 z-50 w-full glass border-b border-white/50 shadow-sm">
       <nav className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-black text-blue-600 hover:text-blue-700 transition-colors">
           RoBazaar
@@ -33,7 +33,7 @@ export default function Navbar() {
           ))}
           <Link
             href="/#book"
-            className="px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors"
+            className="px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 btn-glow"
           >
             Book Now
           </Link>
@@ -49,7 +49,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="md:hidden border-t border-gray-200 bg-white px-4 py-4 space-y-3">
+        <div className="md:hidden border-t border-white/50 glass px-4 py-4 space-y-3">
           {links.map((link) => (
             <Link
               key={link.href}

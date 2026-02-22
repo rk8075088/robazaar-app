@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-gray-900 bg-gray-100 [color-scheme:light]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased text-gray-900 [color-scheme:light]`}
       >
         <Navbar />
         <main className="min-h-screen">{children}</main>

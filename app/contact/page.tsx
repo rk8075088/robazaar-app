@@ -14,10 +14,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-gray-100 text-gray-900">
+    <div className="text-gray-900">
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-gray-900 text-center mb-4">Contact Us</h1>
+          <h1 className="text-4xl font-bold text-gray-900 text-center mb-4 animate-fade-in-up opacity-0">Contact Us</h1>
           <p className="text-lg text-gray-600 text-center mb-12">
             Get in touch for inquiries, support, or service bookings.
           </p>
@@ -53,7 +53,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-lg shadow-gray-200 p-6">
+            <div className="glass-strong rounded-2xl shadow-xl p-6 animate-fade-in-up opacity-0 animate-delay-200">
               <h3 className="font-bold text-gray-900 mb-4">Inquiry Form</h3>
               {sent ? (
                 <div className="p-4 bg-green-100 text-green-800 rounded-xl font-medium">
@@ -94,7 +94,7 @@ export default function ContactPage() {
                   />
                   <button
                     type="submit"
-                    className="w-full py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 flex items-center justify-center gap-2 btn-glow"
                   >
                     <Send size={18} /> Send Message
                   </button>
