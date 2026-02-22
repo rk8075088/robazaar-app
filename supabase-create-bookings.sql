@@ -15,3 +15,9 @@ CREATE POLICY "Allow anon insert" ON public.bookings
   FOR INSERT
   TO anon
   WITH CHECK (true);
+
+-- Required for Admin Panel: allows reading bookings (run if you use /admin-panel)
+CREATE POLICY "Allow anon select" ON public.bookings
+  FOR SELECT
+  TO anon
+  USING (true);

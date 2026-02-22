@@ -54,7 +54,7 @@ export default function ContactPage() {
             </div>
 
             <div className="bg-white rounded-2xl shadow-lg shadow-gray-200 p-6">
-              <h3 className="font-bold text-gray-900 mb-4">Send an Inquiry</h3>
+              <h3 className="font-bold text-gray-900 mb-4">Inquiry Form</h3>
               {sent ? (
                 <div className="p-4 bg-green-100 text-green-800 rounded-xl font-medium">
                   Thank you! Your message has been sent. We will get back to you soon.

@@ -41,9 +41,9 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-gray-900 mb-3">Services</h4>
             <ul className="space-y-2">
-              <li><Link href="/services#repair" className="hover:text-blue-600 transition-colors">RO Repair</Link></li>
+              <li><Link href="/services#installation" className="hover:text-blue-600 transition-colors">RO Installation</Link></li>
+              <li><Link href="/services#filter" className="hover:text-blue-600 transition-colors">Filter Replacement</Link></li>
               <li><Link href="/services#amc" className="hover:text-blue-600 transition-colors">AMC</Link></li>
-              <li><Link href="/services#installation" className="hover:text-blue-600 transition-colors">Installation</Link></li>
             </ul>
           </div>
 

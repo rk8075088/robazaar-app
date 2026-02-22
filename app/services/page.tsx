@@ -1,33 +1,33 @@
 import Link from "next/link";
-import { Wrench, Shield, Truck, ArrowRight } from "lucide-react";
+import { Truck, Filter, Shield, ArrowRight } from "lucide-react";
 
 const services = [
   {
-    id: "repair",
-    icon: Wrench,
-    title: "RO Repair",
-    description: "Expert repair for all RO water purifier brands. We fix leaks, low flow, taste issues, and component failures. Same-day service available.",
-    features: ["Same-day service", "All brands supported", "90-min response", "Genuine parts"],
+    id: "installation",
+    icon: Truck,
+    title: "RO Installation",
+    description: "Professional installation of new RO water purifiers. We handle plumbing, setup, and ensure optimal performance from day one. All major brands supported.",
+    features: ["Professional setup", "Free plumbing", "Demo included", "Warranty support"],
+  },
+  {
+    id: "filter",
+    icon: Filter,
+    title: "Filter Replacement",
+    description: "Replace worn-out RO filters to restore water quality. We use genuine filters and ensure proper installation for maximum purification.",
+    features: ["Genuine filters", "Same-day service", "All brands", "Quality assured"],
   },
   {
     id: "amc",
     icon: Shield,
     title: "AMC (Annual Maintenance)",
-    description: "Keep your RO purifier in top shape with our Annual Maintenance Contract. Regular servicing, filter replacement, and priority support.",
+    description: "Keep your RO purifier in top shape with our Annual Maintenance Contract. Quarterly servicing, filter replacement, and priority support included.",
     features: ["Quarterly servicing", "Free filter replacement", "Priority support", "Best value plans"],
-  },
-  {
-    id: "installation",
-    icon: Truck,
-    title: "Installation",
-    description: "Professional installation of new RO water purifiers. We ensure correct setup, plumbing, and optimal performance from day one.",
-    features: ["Professional setup", "Free plumbing", "Demo included", "Warranty support"],
   },
 ];
 
 export default function ServicesPage() {
   return (
-    <div className="bg-gray-100 text-gray-900">
+    <div className="bg-gray-100 text-gray-900 min-h-screen">
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h1>
@@ -45,7 +45,7 @@ export default function ServicesPage() {
               <div
                 key={service.id}
                 id={service.id}
-                className="bg-white rounded-2xl shadow-lg shadow-gray-200 p-8 md:p-10 hover:shadow-xl transition-shadow"
+                className="bg-white rounded-2xl shadow-lg shadow-gray-200 p-8 md:p-10 hover:shadow-xl transition-shadow scroll-mt-24"
               >
                 <div className="flex flex-col md:flex-row md:items-start gap-6">
                   <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center">
