@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { Users, RefreshCw, Loader2 } from "lucide-react";
 
@@ -9,7 +9,7 @@ type Booking = {
   name: string;
   phone: string;
   service_type: string;
-  created_at: string;
+  created_at: string | null;
 };
 
 export default function AdminPanel() {
@@ -17,28 +17,37 @@ export default function AdminPanel() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     setLoading(true);
     setError(null);
-    const { data, error: err } = await supabase
-      .from("bookings")
-      .select("*")
-      .order("created_at", { ascending: false });
+    try {
+      const { data, error: err } = await supabase
+        .from("bookings")
+        .select("id, name, phone, service_type, created_at")
+        .order("created_at", { ascending: false });
 
-    if (err) {
-      setError(err.message);
+      if (err) {
+        console.error("Admin fetch error:", err);
+        setError(err.message);
+        setBookings([]);
+      } else {
+        setBookings(data ?? []);
+      }
+    } catch (e) {
+      console.error("Admin fetch exception:", e);
+      setError("Failed to load bookings. Check console for details.");
       setBookings([]);
-    } else {
-      setBookings(data ?? []);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     fetchBookings();
-  }, []);
+  }, [fetchBookings]);
 
-  const formatDate = (iso: string) => {
+  const formatDate = (iso: string | null) => {
+    if (!iso) return "—";
     const d = new Date(iso);
     return d.toLocaleString("en-IN", {
       dateStyle: "medium",
@@ -66,10 +75,13 @@ export default function AdminPanel() {
 
         {error && (
           <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-800 rounded-xl">
-            {error}
-            <span className="block text-sm mt-1">
-              Tip: Add a SELECT policy for the &quot;anon&quot; role on the bookings table in Supabase if you see an RLS error.
-            </span>
+            <p className="font-semibold">{error}</p>
+            <p className="text-sm mt-2">
+              To fix: Run this in Supabase SQL Editor:
+            </p>
+            <code className="block mt-1 p-2 bg-red-200 rounded text-xs overflow-x-auto">
+              CREATE POLICY &quot;Allow anon select&quot; ON public.bookings FOR SELECT TO anon USING (true);
+            </code>
           </div>
         )}
 
